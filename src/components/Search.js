@@ -34,38 +34,19 @@ export default class Search extends Component {
     });
   };
 
-  showCityFrom = () => {
-    const dropdownCitiesFrom = document.querySelector('.dropdown__cities-from');
-    dropdownCitiesFrom.textContent = '';
-    if (this.state.origin !== '') {
+  showCity = (input, list) => {
+    list.textContent = '';
+    if (input !== '') {
       const filterCity = this.state.city.filter((item) => {
         const fixItem = item.name.toLowerCase();
-        return fixItem.startsWith(this.state.origin.toLowerCase());
+        return fixItem.startsWith(input.toLowerCase());
       });
 
       filterCity.forEach((item) => {
         const li = document.createElement('li');
         li.classList.add('dropdown__city');
         li.textContent = item.name;
-        dropdownCitiesFrom.append(li);
-      });
-    }
-  };
-
-  showCityTo = () => {
-    const dropdownCitiesTo = document.querySelector('.dropdown__cities-to');
-    dropdownCitiesTo.textContent = '';
-    if (this.state.destination !== '') {
-      const filterCity = this.state.city.filter((item) => {
-        const fixItem = item.name.toLowerCase();
-        return fixItem.startsWith(this.state.destination.toLowerCase());
-      });
-
-      filterCity.forEach((item) => {
-        const li = document.createElement('li');
-        li.classList.add('dropdown__city');
-        li.textContent = item.name;
-        dropdownCitiesTo.append(li);
+        list.append(li);
       });
     }
   };
@@ -148,6 +129,8 @@ export default class Search extends Component {
   };
 
   render() {
+    const dropdownCitiesFrom = document.querySelector('.dropdown__cities-from');
+    const dropdownCitiesTo = document.querySelector('.dropdown__cities-to');
     const { cheapTicket } = this.state;
     const item = this.renderCardCheap(cheapTicket);
     return (
@@ -161,7 +144,11 @@ export default class Search extends Component {
                   <input
                     type="text"
                     value={this.state.origin}
-                    onInput={this.showCityFrom}
+                    onInput={this.showCity.bind(
+                      this,
+                      this.state.origin,
+                      dropdownCitiesFrom,
+                    )}
                     onChange={this.onOriginChange}
                     className="input__cities-from"
                     required
@@ -178,7 +165,11 @@ export default class Search extends Component {
                   <input
                     type="text"
                     value={this.state.destination}
-                    onInput={this.showCityTo}
+                    onInput={this.showCity.bind(
+                      this,
+                      this.state.destination,
+                      dropdownCitiesTo,
+                    )}
                     onChange={this.onDestinationChange}
                     className="input__cities-to"
                     required
