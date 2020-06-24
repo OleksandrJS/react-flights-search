@@ -6,7 +6,7 @@ export default class SearchService {
     this.CITY_API2 = '../dataBase/cities.json';
     this.PROXY = 'https://cors-anywhere.herokuapp.com/';
     this.API_KEY = '6af464c149023c58b81e81ab93488992';
-    this.calendar = 'http://min-prices.aviasales.ru/calendar_preload';
+    this.PRICE = 'https://min-prices.aviasales.ru/calendar_preload';
     this.MAX_COUNT = 10;
   }
   getData = async (url) => {
@@ -25,7 +25,7 @@ export default class SearchService {
   };
 
   getPrice = async (date) => {
-    const res = await this.getData(this.calendar + date);
+    const res = await this.getData(this.PROXY + this.PRICE + date);
     return res;
   };
 }
