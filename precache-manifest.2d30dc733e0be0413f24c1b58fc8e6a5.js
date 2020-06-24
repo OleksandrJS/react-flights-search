@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bce87017e42e0ba451605abd6f486239",
+    "revision": "bb4d36aa71fdf4dde1103209a05a47a4",
     "url": "/react-flights-search/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-flights-search/static/css/2.af3c1da9.chunk.css"
   },
   {
-    "revision": "6fd7b1528499e45cec2c",
+    "revision": "590a498ee1703b50f8a8",
     "url": "/react-flights-search/static/css/main.7f9c9884.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-flights-search/static/js/2.2eb22dea.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6fd7b1528499e45cec2c",
-    "url": "/react-flights-search/static/js/main.6519b99a.chunk.js"
+    "revision": "590a498ee1703b50f8a8",
+    "url": "/react-flights-search/static/js/main.8bc36d68.chunk.js"
   },
   {
     "revision": "dec030bd35e96eb5d76c",
