@@ -114,10 +114,8 @@ export default class Search extends Component {
         otherTickets.style.display = 'block';
       }
     } else {
-      if (this.state.otherTicket === undefined) {
-        otherTickets.style.display = 'block';
-        h2.textContent = `Извините, по этому направлению нет билетов`;
-      }
+      otherTickets.style.display = 'block';
+      h2.textContent = `Извините, по этому направлению нет билетов`;
     }
   };
 
