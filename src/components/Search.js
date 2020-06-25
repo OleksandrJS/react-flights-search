@@ -131,7 +131,7 @@ export default class Search extends Component {
   render() {
     const dropdownCitiesFrom = document.querySelector('.dropdown__cities-from');
     const dropdownCitiesTo = document.querySelector('.dropdown__cities-to');
-    const { cheapTicket } = this.state;
+    const { cheapTicket, origin, destination } = this.state;
     const item = this.renderCardCheap(cheapTicket);
     return (
       <>
@@ -143,10 +143,10 @@ export default class Search extends Component {
                   Откуда
                   <input
                     type="text"
-                    value={this.state.origin}
+                    value={origin}
                     onInput={this.showCity.bind(
                       this,
-                      this.state.origin,
+                      origin,
                       dropdownCitiesFrom,
                     )}
                     onChange={this.onOriginChange}
@@ -164,10 +164,10 @@ export default class Search extends Component {
                   Куда
                   <input
                     type="text"
-                    value={this.state.destination}
+                    value={destination}
                     onInput={this.showCity.bind(
                       this,
-                      this.state.destination,
+                      destination,
                       dropdownCitiesTo,
                     )}
                     onChange={this.onDestinationChange}
@@ -208,7 +208,7 @@ export default class Search extends Component {
             style={{ display: 'none' }}>
             <h2></h2>
             <article className="ticket">
-              {this.state.cheapTicket ? item : ''}
+              {this.state.cheapTicket ? item : null}
             </article>
           </section>
         </section>

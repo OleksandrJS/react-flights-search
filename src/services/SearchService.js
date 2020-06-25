@@ -6,7 +6,6 @@ export default class SearchService {
     this.PROXY = 'https://cors-anywhere.herokuapp.com/';
     this.API_KEY = '6af464c149023c58b81e81ab93488992';
     this.PRICE = 'https://min-prices.aviasales.ru/calendar_preload';
-    this.MAX_COUNT = 10;
   }
   getData = async (url) => {
     const request = await fetch(url);

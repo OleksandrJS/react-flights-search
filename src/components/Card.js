@@ -72,43 +72,42 @@ export default class Card extends Component {
       (item) => item.code === this.props.data.origin,
     );
     this.setState({ cityNameFrom: objCity.name });
-    console.log(this.state.cityNameFrom);
   }
   getNameCityTo() {
     const objCity = this.props.city.find(
       (item) => item.code === this.props.data.destination,
     );
     this.setState({ cityNameTo: objCity.name });
-    console.log(this.state.cityNameTo);
   }
   currencyEx() {
     const exch = (this.props.data.value / 2.6).toFixed(2);
     this.setState({ exch });
   }
   render() {
+    const { link, exch, cityNameFrom, cityNameTo, date, transfer } = this.state;
     return (
       <div className="card_ticket">
         <h3 className="agent">{this.props.data.gate}</h3>
         <div className="ticket__wrapper">
           <div className="left-side">
-            <a href={this.state.link} className="button button__buy">
-              Купить за {this.state.exch}₴
+            <a href={link} className="button button__buy">
+              Купить за {exch}₴
             </a>
           </div>
           <div className="right-side">
             <div className="block-left">
               <div className="city__from">
                 Вылет из города:
-                <span className="city__name">{this.state.cityNameFrom}</span>
+                <span className="city__name">{cityNameFrom}</span>
               </div>
-              <div className="date">{this.state.date}</div>
+              <div className="date">{date}</div>
             </div>
 
             <div className="block-right">
-              <div className="changes">{this.state.transfer}</div>
+              <div className="changes">{transfer}</div>
               <div className="city__to">
                 Город назначения:
-                <span className="city__name">{this.state.cityNameTo}</span>
+                <span className="city__name">{cityNameTo}</span>
               </div>
             </div>
           </div>
