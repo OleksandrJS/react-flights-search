@@ -11,6 +11,7 @@ export default class Search extends Component {
     super(props);
 
     this.SearchService = new SearchService();
+    this.MAX_COUNT = 10;
 
     this.state = {
       origin: '',
@@ -87,12 +88,7 @@ export default class Search extends Component {
     });
   };
 
-  renderCheap = (data, date) => {
-    const cheapTicketYear = data.best_prices;
-    const cheapTicketDay = cheapTicketYear.filter(
-      (item) => item.depart_date === date,
-    );
-    const card = cheapTicketDay[0];
+  cheapestTicket = (card) => {
     this.setState({ cheapTicket: card });
     const cheapestTicket = document.getElementById('cheapest-ticket');
     const h2 = document.querySelector('.wrapper__ticket>h2');
@@ -106,8 +102,42 @@ export default class Search extends Component {
     }
   };
 
+  otherTickets = (card) => {
+    card.sort((a, b) => a.value - b.value);
+    card.splice(9, card.length - 10);
+    this.setState({ otherTicket: card });
+    const otherTickets = document.getElementById('other-cheap-tickets');
+    const h2 = document.querySelector('.block__ticket>h2');
+    if (this.state.cheapTicket && otherTickets) {
+      h2.textContent = `Самые дешевые билеты на другие даты`;
+      otherTickets.style.display = 'block';
+    }
+    if (this.state.cheapTicket === undefined) {
+      otherTickets.style.display = 'block';
+      h2.textContent = `Извините, по этому направлению нет билетов`;
+    }
+  };
+
+  renderCard = (data, date) => {
+    const cheapTicketYear = data.best_prices;
+    const cheapTicketDay = cheapTicketYear.filter(
+      (item) => item.depart_date === date,
+    );
+    const card = cheapTicketDay[0];
+    this.cheapestTicket(card);
+    this.otherTickets(cheapTicketYear);
+  };
+
   renderCardCheap = (item) => {
     return <Card data={item} city={this.state.city} />;
+  };
+
+  renderOtherCheap = (arr) => {
+    if (arr) {
+      return arr.map((item, i) => {
+        return <Card data={item} city={this.state.city} key={i} />;
+      });
+    }
   };
 
   onSearchFlights = (event) => {
@@ -121,7 +151,7 @@ export default class Search extends Component {
     if (formData.from && formData.to) {
       const requestData = `?depart_date=${formData.when}&origin=${formData.from.code}&destination=${formData.to.code}&one_way=true&token=${this.API_KEY}`;
       this.SearchService.getPrice(requestData).then((response) => {
-        this.renderCheap(response, formData.when);
+        this.renderCard(response, formData.when);
       });
     } else {
       alert('Введите корректное название города');
@@ -131,8 +161,9 @@ export default class Search extends Component {
   render() {
     const dropdownCitiesFrom = document.querySelector('.dropdown__cities-from');
     const dropdownCitiesTo = document.querySelector('.dropdown__cities-to');
-    const { cheapTicket, origin, destination } = this.state;
+    const { cheapTicket, otherTicket, origin, destination } = this.state;
     const item = this.renderCardCheap(cheapTicket);
+    const items = this.renderOtherCheap(otherTicket);
     return (
       <>
         <section className="wrapper">
@@ -209,6 +240,15 @@ export default class Search extends Component {
             <h2></h2>
             <article className="ticket">
               {this.state.cheapTicket ? item : null}
+            </article>
+          </section>
+          <section
+            className="block__ticket"
+            id="other-cheap-tickets"
+            style={{ display: 'none' }}>
+            <h2></h2>
+            <article className="ticket">
+              {this.state.otherTicket ? items : null}
             </article>
           </section>
         </section>
