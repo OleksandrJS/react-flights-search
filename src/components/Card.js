@@ -80,7 +80,7 @@ export default class Card extends Component {
     this.setState({ cityNameTo: objCity.name });
   }
   currencyEx() {
-    const exch = (this.props.data.value / 2.6).toFixed(2);
+    const exch = (this.props.data.value / 2.6).toFixed(0);
     this.setState({ exch });
   }
   render() {

@@ -98,23 +98,26 @@ export default class Search extends Component {
     }
     if (this.state.cheapTicket === undefined) {
       cheapestTicket.style.display = 'block';
-      h2.textContent = `Извините, по этому направлению нет билетов`;
+      h2.textContent = `Извините, нет билетов на выбранную дату`;
     }
   };
 
   otherTickets = (card) => {
     card.sort((a, b) => a.value - b.value);
     card.splice(9, card.length - 10);
-    this.setState({ otherTicket: card });
     const otherTickets = document.getElementById('other-cheap-tickets');
     const h2 = document.querySelector('.block__ticket>h2');
-    if (this.state.cheapTicket && otherTickets) {
-      h2.textContent = `Самые дешевые билеты на другие даты`;
-      otherTickets.style.display = 'block';
-    }
-    if (this.state.cheapTicket === undefined) {
-      otherTickets.style.display = 'block';
-      h2.textContent = `Извините, по этому направлению нет билетов`;
+    if (card.length > 0) {
+      this.setState({ otherTicket: card });
+      if (this.state.otherTicket && otherTickets) {
+        h2.textContent = `Самые дешевые билеты на другие даты`;
+        otherTickets.style.display = 'block';
+      }
+    } else {
+      if (this.state.otherTicket === undefined) {
+        otherTickets.style.display = 'block';
+        h2.textContent = `Извините, по этому направлению нет билетов`;
+      }
     }
   };
 
@@ -142,6 +145,7 @@ export default class Search extends Component {
 
   onSearchFlights = (event) => {
     event.preventDefault();
+    this.setState({ otherTicket: '' });
     const formData = {
       from: this.state.city.find((item) => this.state.origin === item.name),
       to: this.state.city.find((item) => this.state.destination === item.name),
