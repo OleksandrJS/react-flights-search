@@ -5,13 +5,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './search.css';
 import SearchService from '../services/SearchService';
 import Card from './Card';
+import { fetchData, hideLoader } from '../redux/actions';
+import { connect } from 'react-redux';
 
-export default class Search extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
 
     this.SearchService = new SearchService();
     this.MAX_COUNT = 10;
+    this.API_KEY = '6af464c149023c58b81e81ab93488992';
 
     this.state = {
       origin: '',
@@ -23,6 +26,7 @@ export default class Search extends Component {
 
   componentDidMount() {
     this.updateCity();
+    this.hideCity();
   }
 
   updateCity() {
@@ -34,6 +38,20 @@ export default class Search extends Component {
       city,
     });
   };
+
+  hideCity() {
+    const body = document.querySelector('body');
+    body.addEventListener('click', (event) => {
+      const dropdownCitiesFrom = document.querySelector(
+        '.dropdown__cities-from',
+      );
+      const dropdownCitiesTo = document.querySelector('.dropdown__cities-to');
+      if (!event.target.closest('.form-search')) {
+        dropdownCitiesFrom.textContent = '';
+        dropdownCitiesTo.textContent = '';
+      }
+    });
+  }
 
   showCity = (input, list) => {
     list.textContent = '';
@@ -152,9 +170,9 @@ export default class Search extends Component {
 
     if (formData.from && formData.to) {
       const requestData = `?depart_date=${formData.when}&origin=${formData.from.code}&destination=${formData.to.code}&one_way=true&token=${this.API_KEY}`;
-      this.SearchService.getPrice(requestData).then((response) => {
-        this.renderCard(response, formData.when);
-      });
+      new Promise((resolve) => resolve(this.props.fetchData(requestData)))
+        .then(() => this.renderCard(this.props.fetchedPosts, formData.when))
+        .then(() => setTimeout(() => this.props.hideLoader(), 300));
     } else {
       alert('Введите корректное название города');
     }
@@ -240,21 +258,30 @@ export default class Search extends Component {
             id="cheapest-ticket"
             style={{ display: 'none' }}>
             <h2></h2>
-            <article className="ticket">
-              {this.state.cheapTicket ? item : null}
-            </article>
+            <article className="ticket">{cheapTicket ? item : null}</article>
           </section>
           <section
             className="block__ticket"
             id="other-cheap-tickets"
             style={{ display: 'none' }}>
             <h2></h2>
-            <article className="ticket">
-              {this.state.otherTicket ? items : null}
-            </article>
+            <article className="ticket">{otherTicket ? items : null}</article>
           </section>
         </section>
       </>
     );
   }
 }
+
+const mapDispatchToProps = {
+  fetchData: fetchData,
+  hideLoader: hideLoader,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    fetchedPosts: state.post.fetchedPosts,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

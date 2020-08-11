@@ -1,8 +1,10 @@
 /** @format */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Loader } from './Loader';
 
-export default class Card extends Component {
+class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -46,6 +48,8 @@ export default class Card extends Component {
   }
 
   getDate() {
+    // console.log(this.state);
+    // console.log(this.props);
     const date = new Date(this.props.data.depart_date).toLocaleString('ru', {
       year: 'numeric',
       month: 'long',
@@ -85,6 +89,14 @@ export default class Card extends Component {
   }
   render() {
     const { link, exch, cityNameFrom, cityNameTo, date, transfer } = this.state;
+    const loading = this.props.loading;
+    if (loading) {
+      return (
+        <div className="card_ticket text-center size">
+          <Loader />
+        </div>
+      );
+    }
     return (
       <div className="card_ticket">
         <h3 className="agent">{this.props.data.gate}</h3>
@@ -116,3 +128,9 @@ export default class Card extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return { loading: state.card.loading };
+};
+
+export default connect(mapStateToProps, null)(Card);

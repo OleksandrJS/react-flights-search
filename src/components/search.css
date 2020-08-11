@@ -67,6 +67,10 @@ h3 {
   margin-top: 50px;
 }
 
+.wrapper__search .input label {
+  margin-bottom: 0;
+}
+
 .wrapper__search .input {
   min-width: 200px;
   max-width: 250px;
@@ -311,6 +315,7 @@ input {
     0 4px 8px 3px rgba(60, 64, 67, 0.15);
   box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3),
     0 4px 8px 3px rgba(60, 64, 67, 0.15);
+  border-radius: 10px;
 }
 
 @media (max-width: 768px) {
@@ -354,4 +359,17 @@ input {
   .block-left {
     margin-bottom: 20px;
   }
+}
+
+.size {
+  width: 730px;
+  height: 165px;
+  margin: 0 auto;
+}
+
+.loader-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
