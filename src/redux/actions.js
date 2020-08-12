@@ -17,12 +17,6 @@ export function hideLoader() {
   };
 }
 
-export function dispatchLoader() {
-  return (dispatch) => {
-    dispatch(hideLoader());
-  };
-}
-
 export function fetchData(data) {
   return async (dispatch) => {
     try {
@@ -30,7 +24,6 @@ export function fetchData(data) {
       const response = await fetch(PRICE + data);
       const json = await response.json();
       dispatch({ type: FETCH_POST, payload: json });
-      // dispatch(hideLoader());
     } catch (e) {
       dispatch(hideLoader());
     }

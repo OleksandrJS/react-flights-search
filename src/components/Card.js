@@ -48,8 +48,6 @@ class Card extends Component {
   }
 
   getDate() {
-    // console.log(this.state);
-    // console.log(this.props);
     const date = new Date(this.props.data.depart_date).toLocaleString('ru', {
       year: 'numeric',
       month: 'long',

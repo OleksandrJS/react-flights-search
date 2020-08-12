@@ -4,6 +4,7 @@ export default class SearchService {
   constructor() {
     this.CITY_API = 'http://api.travelpayouts.com/data/ru/cities.json';
     this.PROXY = 'https://cors-anywhere.herokuapp.com/';
+    this.CITY_API2 = './cities.json';
     // this.PRICE = 'https://min-prices.aviasales.ru/calendar_preload';
   }
   getData = async (url) => {

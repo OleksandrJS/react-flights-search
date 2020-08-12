@@ -68,6 +68,11 @@ class Search extends Component {
         list.append(li);
       });
     }
+    setTimeout(() => {
+      if (this.state.origin === '' && this.state.destination === '') {
+        list.textContent = '';
+      }
+    }, 0);
   };
 
   selectCityFrom = (event) => {
