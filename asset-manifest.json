@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/react-flights-search/static/css/main.dcfaa2c8.chunk.css",
+    "main.css": "/react-flights-search/static/css/main.b9954cc4.chunk.css",
     "main.js": "/react-flights-search/static/js/main.301ae2c4.chunk.js",
     "main.js.map": "/react-flights-search/static/js/main.301ae2c4.chunk.js.map",
     "runtime-main.js": "/react-flights-search/static/js/runtime-main.95859e8b.js",
@@ -9,10 +9,10 @@
     "static/js/2.861ac536.chunk.js": "/react-flights-search/static/js/2.861ac536.chunk.js",
     "static/js/2.861ac536.chunk.js.map": "/react-flights-search/static/js/2.861ac536.chunk.js.map",
     "index.html": "/react-flights-search/index.html",
-    "precache-manifest.40801561f69dcce692fd6e7fcf425741.js": "/react-flights-search/precache-manifest.40801561f69dcce692fd6e7fcf425741.js",
+    "precache-manifest.1cd94c23ee76b50995576c8a155ce8cf.js": "/react-flights-search/precache-manifest.1cd94c23ee76b50995576c8a155ce8cf.js",
     "service-worker.js": "/react-flights-search/service-worker.js",
     "static/css/2.af3c1da9.chunk.css.map": "/react-flights-search/static/css/2.af3c1da9.chunk.css.map",
-    "static/css/main.dcfaa2c8.chunk.css.map": "/react-flights-search/static/css/main.dcfaa2c8.chunk.css.map",
+    "static/css/main.b9954cc4.chunk.css.map": "/react-flights-search/static/css/main.b9954cc4.chunk.css.map",
     "static/js/2.861ac536.chunk.js.LICENSE.txt": "/react-flights-search/static/js/2.861ac536.chunk.js.LICENSE.txt",
     "static/media/search.css": "/react-flights-search/static/media/plane.dc0320ce.svg"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.95859e8b.js",
     "static/css/2.af3c1da9.chunk.css",
     "static/js/2.861ac536.chunk.js",
-    "static/css/main.dcfaa2c8.chunk.css",
+    "static/css/main.b9954cc4.chunk.css",
     "static/js/main.301ae2c4.chunk.js"
   ]
 }
