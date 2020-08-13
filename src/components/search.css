@@ -120,6 +120,20 @@ input {
   color: #000;
   max-height: 300px;
   overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #307feb #f0f6fe;
+  border-radius: 5px;
+}
+
+.dropdown::-webkit-scrollbar {
+  width: 7px;
+}
+.dropdown::-webkit-scrollbar-thumb {
+  background-color: #307feb;
+}
+.dropdown::-webkit-scrollbar-track {
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .dropdown__city {

@@ -53,23 +53,47 @@ class Search extends Component {
     });
   }
 
-  showCity = (input, list) => {
+  showCityFrom = (list) => {
     list.textContent = '';
-    if (input !== '') {
-      const filterCity = this.state.city.filter((item) => {
-        const fixItem = item.name.toLowerCase();
-        return fixItem.startsWith(input.toLowerCase());
-      });
-
-      filterCity.forEach((item) => {
-        const li = document.createElement('li');
-        li.classList.add('dropdown__city');
-        li.textContent = item.name;
-        list.append(li);
-      });
-    }
     setTimeout(() => {
-      if (this.state.origin === '' && this.state.destination === '') {
+      const { origin } = this.state;
+      if (origin !== '') {
+        const filterCity = this.state.city.filter((item) => {
+          const fixItem = item.name.toLowerCase();
+          return fixItem.startsWith(origin.toLowerCase());
+        });
+
+        filterCity.forEach((item) => {
+          const li = document.createElement('li');
+          li.classList.add('dropdown__city');
+          li.textContent = item.name;
+          list.append(li);
+        });
+      }
+      if (origin === '') {
+        list.textContent = '';
+      }
+    }, 10);
+  };
+
+  showCityTo = (list) => {
+    list.textContent = '';
+    setTimeout(() => {
+      const { destination } = this.state;
+      if (destination !== '') {
+        const filterCity = this.state.city.filter((item) => {
+          const fixItem = item.name.toLowerCase();
+          return fixItem.startsWith(destination.toLowerCase());
+        });
+
+        filterCity.forEach((item) => {
+          const li = document.createElement('li');
+          li.classList.add('dropdown__city');
+          li.textContent = item.name;
+          list.append(li);
+        });
+      }
+      if (destination === '') {
         list.textContent = '';
       }
     }, 0);
@@ -189,6 +213,7 @@ class Search extends Component {
     const { cheapTicket, otherTicket, origin, destination } = this.state;
     const item = this.renderCardCheap(cheapTicket);
     const items = this.renderOtherCheap(otherTicket);
+    const inputFrom = document.querySelector('.input-from');
     return (
       <>
         <section className="wrapper">
@@ -200,12 +225,8 @@ class Search extends Component {
                   <input
                     type="text"
                     value={origin}
-                    onInput={this.showCity.bind(
-                      this,
-                      origin,
-                      dropdownCitiesFrom,
-                    )}
-                    onChange={this.onOriginChange}
+                    onInput={this.onOriginChange}
+                    onChange={() => this.showCityFrom(dropdownCitiesFrom)}
                     className="input__cities-from"
                     required
                   />
@@ -221,12 +242,8 @@ class Search extends Component {
                   <input
                     type="text"
                     value={destination}
-                    onInput={this.showCity.bind(
-                      this,
-                      destination,
-                      dropdownCitiesTo,
-                    )}
-                    onChange={this.onDestinationChange}
+                    onInput={this.onDestinationChange}
+                    onChange={() => this.showCityTo(dropdownCitiesTo)}
                     className="input__cities-to"
                     required
                   />
